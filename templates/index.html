@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>見守りカメラ</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css" />
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css" />
+    <link rel="stylesheet" href="./static/style.css" />
+  </head>
+
+  <body>
+    <template id="main">
+      <!-- 縦モードのときの表示 -->
+      <div v-if="status.isPortrait">
+        <!-- サイドバーの記述 -->
+        <v-ons-splitter>
+          <v-ons-splitter-side swipeable width="200px" collapse="" side="left" :open="status.openSide" @postclose="closeMenuEvent">
+            <v-ons-page>
+              <v-ons-list>
+                <v-ons-list-item>
+                  <div class="center app-font" style="font-size: 11px">【データ容量】{{ status.totalDataSize }}</div>
+                </v-ons-list-item>
+              </v-ons-list>
+            </v-ons-page>
+          </v-ons-splitter-side>
+
+          <v-ons-splitter-content>
+            <v-ons-page>
+              <v-ons-toolbar>
+                <div class="left">
+                  <v-ons-toolbar-button>
+                    <v-ons-icon @click="showMenu()" icon="ion-ios-menu, material:md-menu" size="35px"></v-ons-icon>
+                  </v-ons-toolbar-button>
+                </div>
+                <div class="center app-font">見守りカメラ</div>
+                <div class="right">
+                  <v-ons-toolbar-button>
+                    <v-ons-icon @click="updateSoundMode()" :icon="status.currentIcon" size="35px"> </v-ons-icon>
+                  </v-ons-toolbar-button>
+                </div>
+              </v-ons-toolbar>
+
+              <div class="content content-flex">
+                <v-ons-card>
+                  <div class="preview-card">
+                    <img :src="status.cameraPhoto" />
+                    <p class="date">{{ status.timeStampText }}</p>
+                  </div>
+
+                  <div class="speech-area">
+                    <img class="robot-anim" src="./static/assets/character.png" />
+                    <div class="speech-bubble">
+                      <p>{{ status.speechBubbleText }}</p>
+                    </div>
+                  </div>
+                </v-ons-card>
+
+                <div class="records">
+                  <v-ons-list v-for="photo in status.recordPhotos" :key="photo.name">
+                    <v-ons-list-item tappable class="records-item" @click="showPreview(photo.name)">
+                      <div class="left records-item-left">
+                        <img v-lazy="'./datas/' + photo.name" :key="photo.name" />
+                      </div>
+                      <div class="center records-item-center">
+                        <p style="text-align: left; font-size: 2.5vw; margin-right: 10px">【表情】{{ photo.emotion }}</p>
+                        <p style="text-align: left; font-size: 2.5vw; margin-right: 10px; white-space: nowrap">【ラベル】{{ photo.labels }}</p>
+                        <p style="text-align: left; font-size: 2.5vw; margin-right: 10px">【日時】{{ photo.date }}</p>
+                      </div>
+                    </v-ons-list-item>
+                  </v-ons-list>
+                </div>
+
+                <v-ons-modal class="modal-content" :visible="status.previewVisible" @click="closePreview()">
+                  <div>
+                    <img :src="status.previewPhoto" />
+                  </div>
+                </v-ons-modal>
+              </div>
+            </v-ons-page>
+          </v-ons-splitter-content>
+        </v-ons-splitter>
+      </div>
+      <!-- 横モードのときの表示 -->
+      <div v-else>
+        <v-ons-page style="background-color: #333333">
+          <div class="content content-flex">
+            <div class="preview-card-landscape">
+              <img :src="status.cameraPhoto" />
+              <p class="date">{{ status.timeStampText }}</p>
+            </div>
+          </div>
+        </v-ons-page>
+      </div>
+    </template>
+
+    <div id="app"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue-demi"></script>
+    <script src="https://unpkg.com/pinia"></script>
+    <script src="https://unpkg.com/@jambonn/vue-lazyload/dist/vue-lazyload.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-onsenui@3.0.0/dist/vue-onsenui.min.js"></script>
+    <script src="./static/main.js"></script>
+  </body>
+</html>

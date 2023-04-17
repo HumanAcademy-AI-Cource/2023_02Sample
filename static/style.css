@@ -1,0 +1,175 @@
+/* -------------------------------------------------------------------------------- */
+
+.content-flex {
+  display: flex;
+  flex-direction: column;
+  font-family: "Mochiy Pop One", sans-serif;
+}
+
+.app-font {
+  font-family: "Mochiy Pop One", sans-serif;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.preview-card {
+  position: relative;
+}
+
+.preview-card img {
+  width: 100%;
+}
+
+.preview-card .date {
+  position: absolute;
+  right: 5px;
+  bottom: 0px;
+  padding: 5px;
+  font: 11px "Mochiy Pop One";
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.preview-card-landscape {
+  flex: 1;
+  overflow: hidden;
+  text-align: center;
+  background-color: #333333;
+}
+
+.preview-card-landscape img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.preview-card-landscape .date {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  padding: 5px;
+  font: 11px "Mochiy Pop One";
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.speech-area {
+  position: relative;
+  display: flex;
+  margin-top: 10px;
+}
+
+.speech-area p {
+  color: #333333;
+  font: normal 3.8vw "Mochiy Pop One";
+  position: absolute;
+  padding: 5px;
+  margin: 0;
+}
+
+.speech-area img {
+  width: 25%;
+  height: 25%;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.speech-bubble {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e6d716;
+  margin-left: 30px;
+  padding: 20px 20px 20px 10px;
+  border-radius: 10px;
+}
+
+.speech-bubble:after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(230, 215, 22, 0);
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-left-width: 15px;
+  border-right-width: 15px;
+  margin-top: -10px;
+  border-right-color: #e6d716;
+  right: 100%;
+  top: 48%;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.robot-anim {
+  animation-name: robot-anim;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes robot-anim {
+  0% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  50% {
+    transform: scale(0.95, 0.95) translate(0%, 0%);
+  }
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  display: flex;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.records {
+  flex: 1;
+  overflow: scroll;
+  min-height: 300px;
+}
+
+.records-item {
+  padding: 0;
+}
+
+.records-item-left {
+  width: 30%;
+  padding: 0;
+}
+
+.records-item-left img {
+  width: 100%;
+}
+
+.records-item-center {
+  width: 70%;
+  padding: 0;
+}
+
+.records-item-center p {
+  width: 100%;
+  font: normal 3vw "Mochiy Pop One";
+  text-align: center;
+  margin: 0;
+  margin-left: 10px;
+}
+
+/* -------------------------------------------------------------------------------- */
